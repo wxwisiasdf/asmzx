@@ -1,0 +1,70 @@
+A       JMP         rrrr0000    Jump to the address pointed by X(r) and store return on X(r + 2)
+A       INC         rrrr0001    Increment X(r) and store result on X(r + 2)
+A       ADD         rrrr0010    Add X(r + 1) to X(r) and place result on X(r + 2)
+A       DEC         rrrr0011    Decrement X(r) and store result on X(r + 2)
+A       FLP         rrrr0100    Flip sign of X(r) and store result on X(r + 2)
+A       NOT         rrrr0101    Bitwise NOT of X(r) and store result on X(r + 2)
+A       AND         rrrr0110    Bitwise AND of X(r) with X(r + 1) and store result on X(r + 2)
+A       IOR         rrrr0111    Bitwise OR of X(r) with X(r + 1) and store result on X(r + 2)
+A       XOR         rrrr1000    Bitwise XOR of X(r) with X(r + 1) and store result on X(r + 2)
+A       IN2         rrrr1001    Add 2 to X(r) and store result on X(r + 2)
+A       DE2         rrrr1010    Subtract 2 from X(r) and store result on X(r + 2)
+A       SUS         rrrr1011    Subtract unsigned X(r + 1) from X(r) and store result on X(r + 2)
+A       AUS         rrrr1100    Add unsigned X(r + 1) to X(r) and store result on X(r + 2)
+A       HLF         rrrr1101    Perform a bitwise AND of X(r) so that it's lower half is 0, store result on X(r + 2)
+A       HIF         rrrr1110    Perform a bitwise AND of X(r) so that it's higher half is 0, store result on X(r + 2)
+A       VVV         rrrr1111    The next byte is dedicated to a B-type instruction
+B       SPC         00000000    Set PC index to `rrrr`
+B       GPC         00000001    Get value of PC and place it on X(r + 2)
+B       BSQ         00000010    Byteswap-64 bit value on X(r), place result on X(r + 2)
+B       BSW         00000011    Byteswap-32 bit value on X(r), place result on X(r + 2)
+B       BSS         00000100    Byteswap-16 bit value on X(r), place result on X(r + 2)
+B       MUL         00000101    Unsigned multiply X(r) with X(r + 1), place result on X(r + 2)
+B       DIV         00000110    Unsigned divide X(r) with X(r + 1), place result on X(r + 2)
+B       SSP         00000111    Set SP index to `rrrr`
+B       GSP         00001000    Get value of SP and place it on X(r + 2)
+B       PSB         00001001    Push byte from X(r) to stack
+B       PSS         00001010    Push short from X(r) to stack
+B       PSW         00001011    Push word from X(r) to stack
+B       PSQ         00001100    Push quadword from X(r) to stack
+B       QSB         00001101    Pop byte to X(r + 2) from stack
+B       QSS         00001110    Pop short to X(r + 2) from stack
+B       QSW         00001111    Pop word to X(r + 2) from stack
+B       QSQ         00010000    Pop quadword to X(r + 2) from stack
+B       SDS         00010001    Set store direction flag (upwards)
+B       SDC         00010010    Clear store direction flag (downwards)
+B       LDS         00010011    Set load direction flag (upwards)
+B       LDC         00010100    Clear load direction flag (downwards)
+B       SSB         00010101    Store and zero-extend byte from X(r) into address computed of X(r) + X(r + 1)
+B       SSS         00010110    Store and zero-extend short from X(r) into address computed of X(r) + X(r + 1)
+B       SSW         00010111    Store and zero-extend word from X(r) into address computed of X(r) + X(r + 1)
+B       SSQ         00011000    Store and zero-extend quadword from X(r) into address computed of X(r) + X(r + 1)
+B       LSB         00011001    Load and zero-extend byte into X(r + 2) from address computed of X(r) + X(r + 1)
+B       LSS         00011010    Load and zero-extend short into X(r + 2) from address computed of X(r) + X(r + 1)
+B       LSW         00011011    Load and zero-extend word into X(r + 2) from address computed of X(r) + X(r + 1)
+B       LSQ         00011100    Load and zero-extend quadword into X(r + 2) from address computed of X(r) + X(r + 1)
+B       CPY         00011101    Copy X(r + 1) bytes from address X(r) to address X(r + 2)
+B       NXR         00011111    Store the result of NOT X(r) + NOT X(r + 1) into X(r + 2)
+B       JMR         00100000    Jump to X(r), return address stored in X(r + 2)
+B       JRR         00100001    Jump to X(r) + X(r + 1), return address stored in X(r + 2)
+B       BFR         00100010    Branch X(r + 2) bytes if X(r) is 0
+B       BNR         00100011    Branch X(r + 2) bytes if X(r) is NOT 0
+B       BEQ         00100100    Branch X(r + 2) bytes if X(r) is equal to X(r + 1)
+B       BNE         00100101    Branch X(r + 2) bytes if X(r) is not equal to X(r + 1)
+B       DEB         00100111    Raise debug exception
+B       SCN         00101000    Scan X(r + 2) bytes from X(r) until hitting byte X(r + 1), and store length in X(r + 2)
+B       CMA         00101001    Compare data at address X(r) and X(r + 1), and store binary difference in X(r + 2)
+B       SEX         00101010    Set exception handler X(r) to address X(r + 1), store old handler in X(r + 2)
+B       RRS         00101011    Allow flexible rrrr-rrrr specification
+B       RRC         00101100    Disallow flexible rrrr-rrrr specification
+B       DDD         00101101    Output debug information stored at X(r)
+B       CCC         00101110    Set X(r + 2) to zero
+B       CC2         00101111    Set X(r + 2) to zero, X(r) to all 1's
+B       CC3         00110000    Set X(r + 2) to zero, X(r) to all 1's and X(r + 1) to 0x3F3F3F3F3F3F3F3F
+B       PW3         00110001    Set X(r + 2) to X(r) * X(r) * X(r)
+B       PW4         00110010    Set X(r + 2) to X(r) * X(r) * X(r) * X(r)
+B       PW5         00110011    Set X(r + 2) to X(r) * X(r) * X(r) * X(r) * X(r)
+B       SE0         00110100    Set Invalid instruction exception to X(r)
+B       IMM         00110101    Set X(r) to immediate; treats rrrr-rrrr byte as the 8-bit immediate, if flexible registers are disabled, the result is undefined.
+B       LS8         00110110    Left shift X(r) by 8-bytes and store the result on X(r + 2)
+B       CLR         00110111    Set X(r), X(r + 1) and X(r + 2) to zero

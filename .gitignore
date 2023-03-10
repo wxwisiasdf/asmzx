@@ -1,0 +1,10 @@
+*
+!.gitignore
+!*.sv
+!main.cpp
+!build.sh
+!asmzx/
+!asmzx/*.cpy
+!asmzx/*.asm
+!asmzx/*.cbl
+!asmzx/opcodes.def
